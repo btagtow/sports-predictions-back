@@ -1,24 +1,22 @@
 class AuthenticationController < ApplicationController
+    
     def login
-
         @user = User.find_by(username: params[:username])
 
-        if @user 
-            
+        if @user
+
             if @user.authenticate(params[:password])
-                payload = { user_id: @user.id }
-                secret = Rails.application.secrets.secret_key_base
-                token = JWT.encode(payload, secret)
 
-                render json: { token: token }
+                token = createToken(@user)
 
-            else 
-                render json: { message: "Please try again..."}, status: :unauthorized
-
+                render json: { token: token, user_id: @user.id, user: @user }, status: 200, include: :game_selections
+                
+            else
+                render json: {message: "Login info incorrect", status: :unauthorized}, status: :unauthorized
             end
-
-        else 
-            render json: { message: "Please try again"}, status: :unauthorized
+        else
+            render json: {message: "Username doesn't exist", status: :unauthorized}, status: :unauthorized
         end
     end
+
 end
