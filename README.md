@@ -1,24 +1,3 @@
-# README
+To proceed, clone this repo onto your computer. Run bundle install and rails s (start the portal on localhost:3000). 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Follow this link to get the front-end running, (repo has it's own README) : https://github.com/btagtow/sports-predictions-front/ 

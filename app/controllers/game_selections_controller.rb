@@ -7,11 +7,6 @@ class GameSelectionsController < ApplicationController
         render json: @game_selections 
     end
 
-    def show 
-        @game_selections = GameSelection.where(user_id: params[:id]) 
-        render json: @game_selections 
-    end
-
     def create 
         @game_selection = GameSelection.create(game_selections_params) 
         
@@ -26,8 +21,9 @@ class GameSelectionsController < ApplicationController
     end
 
     def destroy 
-        GameSelection.destroy(params[:id])
-        render json: "Destroyed"
+
+        @game_selection = GameSelection.destroy(params[:id])
+        render json: {message: "Destroyed", deleted_game: @game_selection}
     end
 
     private 
