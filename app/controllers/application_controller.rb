@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::API
 
     def authenticate
+        @user = User.find_by(username: params[:username])
+
         authorization_header = request.headers["Authorization"]
 
         if authorization_header
