@@ -2,6 +2,8 @@ class GameSelectionsController < ApplicationController
 
     before_action :authenticate
 
+    
+
     def index 
         @game_selections = GameSelection.all 
         render json: @game_selections 
@@ -13,8 +15,8 @@ class GameSelectionsController < ApplicationController
         if @game_selection.save 
             render json: {
                 message: "Accepted", 
-                game_selection: @game_selection
-            }
+                game_selection: @game_selection            
+            }, include: :user
         else
             render json: @game_selection.errors
         end
@@ -29,6 +31,7 @@ class GameSelectionsController < ApplicationController
     private 
 
     def game_selections_params
+
         params.require(:game_selection).permit(
             :dateEvent,
             :idAwayTeam,

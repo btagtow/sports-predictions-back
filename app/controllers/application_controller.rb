@@ -15,15 +15,15 @@ class ApplicationController < ActionController::API
                 payload = decoded_token[0]
                 @user_id = payload["user_id"]
             rescue
-                render json: {message: "nice try assholeeee"}, status: :unauthorized
+                render json: {message: "Not authorized"}, status: :unauthorized
             end
         else
-            render json: {message: "nice try assholE"}, status: :unauthorized
+            render json: {message: "Not authorized."}, status: :unauthorized
         end
     end
 
     def createToken(user)
-        payload = { user_id: user.id }
+        payload = { user_id: user.id, user: @user }
         secret = Rails.application.secrets.secret_key_base
         JWT.encode(payload, secret)
     end
